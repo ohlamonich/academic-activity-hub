@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Task {
+  id     Int      @id @default(autoincrement())
+  isDone Boolean? @default(false)
+  name   String
+}
+
+model SciPub {
+  name    String
+  author  String
+  pubDate String
+  DOI     String  @id
+  ISSN    String
+  link    String?
+  type    String?
+  lang    String
+  journal String?
+  place   String?
+  volume  Int?
+  page    Int?
+}
+
+model User {
+  name    String
+  surname String
+  login   String @id
+  passw   String
+  email   String
+  role    String
+}
+
+model Journal {
+  name    String
+  theme   String?
+  period  String?
+  place   String?
+  ISSN    String  @id
+  year    Int?
+  contact String?
+}
+
+model Conference {
+  id      Int     @id @default(autoincrement())
+  name    String
+  date    String?
+  place   String?
+  host    String
+  speaker String
+  prog    String?
+  thesis  String?
+}
